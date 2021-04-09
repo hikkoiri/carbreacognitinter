@@ -6,6 +6,7 @@ import {
 } from 'carbon-components-react';
 import SignInForm from '../SignInForm';
 import SignUpForm from '../SignUpForm';
+import { Auth } from 'aws-amplify';
 
 
 const AuthenticationModal = ({ isOpen, close }) => {
@@ -21,6 +22,20 @@ const AuthenticationModal = ({ isOpen, close }) => {
     }
 
 
+    async function signUp() {
+        try {
+            const { user } = await Auth.signUp({
+                username: "user",
+                password: "12345678abc!XYZ",
+                attributes: {
+                    email: "test@test.com" 
+                }
+            });
+            console.log(user);
+        } catch (error) {
+            console.log('error signing up:', error);
+        }
+    }
 
     return (
         <div>
@@ -30,7 +45,11 @@ const AuthenticationModal = ({ isOpen, close }) => {
                 modalHeading={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
                 modalLabel="User action"
                 primaryButtonText={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
-                secondaryButtonText="Cancel">
+                secondaryButtonText="Cancel"
+                onRequestSubmit={signUp}>
+
+               
+
 
 
                 {isSignInInsteadOfSignUp &&
