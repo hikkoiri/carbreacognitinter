@@ -7,5 +7,5 @@ RUN npm install --force && \
 
 
 FROM nginx:alpine
-COPY --from=builder build/* /usr/share/nginx/html/
+COPY --from=builder build/ /usr/share/nginx/html/
 RUN  adduser -u 1000 -D -S -G www-data www-data
