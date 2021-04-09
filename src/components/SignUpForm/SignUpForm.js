@@ -2,9 +2,7 @@ import React from 'react';
 import {
   Form,
   TextInput,
-  ModalWrapper
 } from 'carbon-components-react'
-import { Link } from 'react-router-dom';
 
 const UsernameTextInputProps = {
   id: 'username',
@@ -28,19 +26,9 @@ const RepeatPasswordProps = {
   labelText: 'Repeat Password',
 };
 
-const SignUpPage = () => (
-  <div>
-    <ModalWrapper
-      modalHeading="Sign Up"
-      modalLabel="User action"
-      primaryButtonText="Sign Up"
-      secondaryButtonText="Cancel"
-    >
-      <div style={{ marginBottom: '2rem' }}>
-        <p> Already have an account? <Link to="/signin">Try signing in</Link></p>
-      </div>
+const SignUpForm = () => (
 
-      <Form>
+      <Form style={{ marginTop: '2rem' }}>
 
         <div style={{ marginBottom: '2rem' }}>
           <TextInput required {...UsernameTextInputProps} />
@@ -58,16 +46,13 @@ const SignUpPage = () => (
           />
         </div>
 
-        <div style={{ marginBottom: '2rem' }}>
           <TextInput
             type="password"
             required
             {...RepeatPasswordProps}
           />
-        </div>
       </Form>
-    </ModalWrapper>
-  </div>
+
 );
 
-export default SignUpPage;
+export default SignUpForm;

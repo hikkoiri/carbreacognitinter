@@ -5,15 +5,10 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
-  HeaderNavigation,
   HeaderMenuButton,
-  HeaderMenuItem,
   HeaderGlobalBar,
   HeaderGlobalAction,
   SkipToContent,
-  SideNav,
-  SideNavItems,
-  HeaderSideNavItems
 } from 'carbon-components-react';
 import {
   UserAvatar20,
@@ -61,28 +56,7 @@ const GenericHeader = withRouter(({ history }) => {
             <HeaderName element={Link} to="/" prefix="Home of">
               CARBREACOGNITINTER
         </HeaderName>
-            <HeaderNavigation aria-label="">
-              <HeaderMenuItem element={Link} to="/signup">
-                Sign up
-          </HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/signin">
-                Sign in
-          </HeaderMenuItem>
-            </HeaderNavigation>
-            <SideNav aria-label=""
-              expanded={isSideNavExpanded}
-              isPersistent={false}>
-              <SideNavItems>
-                <HeaderSideNavItems>
-                  <HeaderMenuItem element={Link} to="/signup">
-                    Sign up
-              </HeaderMenuItem>
-                  <HeaderMenuItem element={Link} to="/signin">
-                    Sign in
-              </HeaderMenuItem>
-                </HeaderSideNavItems>
-              </SideNavItems>
-            </SideNav>
+
             <HeaderGlobalBar>
               <HeaderGlobalAction aria-label="" onClick={(e) => userButtonOnClick(e, history)}>
                 <UserAvatar20  />
