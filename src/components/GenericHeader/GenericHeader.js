@@ -30,8 +30,7 @@ const GenericHeader = withRouter(({ history }) => {
   async function userButtonOnClick(e, history) {
     // check is user is logged in
     try {
-      const userSession = await Auth.currentAuthenticatedUser();
-      console.log(userSession)
+      await Auth.currentAuthenticatedUser();
       console.log("already logged in. redirecting to user page")
       history.push("/user");
     } catch (error) {

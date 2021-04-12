@@ -17,9 +17,7 @@ const UserPage = () => {
     const getUser = async () => {
       const user = await Auth.currentAuthenticatedUser()
       setCurrentAuthenticatedUser(user)
-      console.log(user)
-
-      //set
+      //console.log(user)
     }
     getUser()
   }, [])

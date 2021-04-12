@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import LandingPage from './content/LandingPage';
 import UserPage from './content/UserPage';
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 
 Amplify.configure({
   Auth: {

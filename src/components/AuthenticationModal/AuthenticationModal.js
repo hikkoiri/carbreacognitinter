@@ -7,7 +7,7 @@ import {
 } from 'carbon-components-react';
 import SignInForm from '../SignInForm';
 import SignUpForm from '../SignUpForm';
-import { Auth, signInButton } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 
 const AuthenticationModal = ({ isOpen, close }) => {
@@ -64,7 +64,7 @@ const AuthenticationModal = ({ isOpen, close }) => {
         console.log("signing in")
 
         try {
-            const user = await Auth.signIn(signInUserIdentifier, signInPassword);
+            await Auth.signIn(signInUserIdentifier, signInPassword);
             //signup succeded
             close()
         } catch (error) {
@@ -116,7 +116,7 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
 
         try {
-            const { user } = await Auth.signUp({
+            await Auth.signUp({
                 username: signUpUsername,
                 password: signUpPassword,
                 attributes: {
