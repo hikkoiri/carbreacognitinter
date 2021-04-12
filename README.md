@@ -15,6 +15,19 @@ Regarding the technology choices:
 
 ## Operations guide
 
+### Prerequisites
+
+Before running the project make sure to have an AWS account and one Cognito User Pool already configured.
+(One I have time I will also share a AWS CDK script, which automatically generates and confgures the necessary AWS resources. )
+In the mean time you have to do it yourself and need to configure your React app to use the following configurations, which need to be saved in the `.env` file in the project root directory:
+
+```bash
+REACT_APP_COGNITO_REGION="'XX-XXXX-X"
+REACT_APP_COGNITO_USER_POOL_ID="XX-XXXX-X_abcd1234"
+REACT_APP_COGNITO_USER_POOL_WEB_CLIENT_ID="a1b2c3d4e5f6g7h8i9j0k1l2m3"
+```
+More information regarding the configuration can be found [here](https://docs.amplify.aws/lib/auth/start/q/platform/js#create-new-authentication-resource).
+
 ### Development
 
 Clone the repo and run  `npm start` and under [http://localhost:3000](http://localhost:3000) the app should be accessible.
@@ -28,3 +41,4 @@ I already added docker support, so that you have an OCI image, which you can dep
 docker build --pull --rm -f "Dockerfile" -t carbreacognitinter:latest "."
 docker run -p 8080:80 cabreacognitinter:latest
 ```
+(Make sure to pass the React configuration as build args or .env file during the docker build)
