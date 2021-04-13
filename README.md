@@ -18,7 +18,7 @@ Regarding the technology choices:
 ### Prerequisites
 
 Before running the project make sure to have an AWS account and one Cognito User Pool already configured.
-(One I have time I will also share a AWS CDK script, which automatically generates and confgures the necessary AWS resources. )
+(Once I have time I will also share a AWS CDK script, which automatically generates and configures the necessary AWS resources. )
 In the mean time you have to do it yourself and need to configure your React app to use the following configurations, which need to be saved in the `.env` file in the project root directory:
 
 ```bash
@@ -55,7 +55,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [x] rename user page to "My Profile"
 - [x] remove email as sign in possibility 
 - [ ] add Logged in as xyz label
-- [ ] implement "forgot password" possibility
+- [ ] implement "forgot password" functionality
 - [x] fix logout access denied error
 - [ ] introduce "thanks for registering" modal
 - [ ] build AWS CDK script for cognito user pool
