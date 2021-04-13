@@ -12,7 +12,7 @@ const LogoutButton = withRouter(({ history }) => {
 
     async function logout() {
         try {
-            await Auth.signOut({ global: true });
+            await Auth.signOut();
             console.log('successfully signed out');
             history.push("/");
 

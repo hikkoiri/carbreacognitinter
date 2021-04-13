@@ -56,7 +56,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] remove email as sign in possibility 
 - [ ] add Logged in as xyz label
 - [ ] implement "forgot password" possibility
-- [ ] fix logout access denied error
+- [x] fix logout access denied error
 - [ ] introduce "thanks for registering" modal
 - [ ] build AWS CDK script for cognito user pool
 - [ ] implement the complete i18n part of the project
