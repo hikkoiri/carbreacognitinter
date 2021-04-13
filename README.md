@@ -60,3 +60,4 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] introduce "thanks for registering" modal
 - [ ] build AWS CDK script for cognito user pool
 - [ ] implement the complete i18n part of the project
+- [ ] add password visibility toogle
