@@ -19,7 +19,7 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
 
     //sign in 
-    const [signInUserIdentifier, setSignInUserIdentifier] = useState('')
+    const [signInUsername, setSignInUsername] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
 
     //sign up
@@ -48,11 +48,11 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
 
     async function signIn() {
-        //console.log(signInUserIdentifier)
+        //console.log(signInUsername)
         //console.log(signInPassword)
 
-        if (signInUserIdentifier === "") {
-            showErrorMessage("User identifier cannot be empty. Please enter email or username.")
+        if (signInUsername === "") {
+            showErrorMessage("Username cannot be empty.")
             return;
         }
 
@@ -64,8 +64,8 @@ const AuthenticationModal = ({ isOpen, close }) => {
         console.log("signing in")
 
         try {
-            await Auth.signIn(signInUserIdentifier, signInPassword);
-            //signup succeded
+            await Auth.signIn(signInUsername, signInPassword);
+            //signin succeded
             close()
         } catch (error) {
             showErrorMessage(error.message)
@@ -160,7 +160,7 @@ const AuthenticationModal = ({ isOpen, close }) => {
                     <>
                         <p> Don't have an account? <a onClick={toggle} >Create one</a></p>
                         <SignInForm
-                            onUserIdentifierChange={(id) => setSignInUserIdentifier(id)}
+                            onUsernameChange={(id) => setSignInUsername(id)}
                             onPasswordChange={(password) => setSignInPassword(password)}
                         />
                     </>

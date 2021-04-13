@@ -53,7 +53,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] fix `<a>` cursor
 - [ ] introduce success notifications for login & logout
 - [ ] rename user page to "My Profile"
-- [ ] remove email as sign in possibility 
+- [x] remove email as sign in possibility 
 - [ ] add Logged in as xyz label
 - [ ] implement "forgot password" possibility
 - [x] fix logout access denied error

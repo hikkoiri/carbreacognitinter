@@ -6,11 +6,11 @@ import {
 
 
 
-const SignInForm = ({onUserIdentifierChange, onPasswordChange}) => {
+const SignInForm = ({onUsernameChange, onPasswordChange}) => {
   
-  const UserIdentifierTextInputProps = {
-    id: 'useridentifier',
-    labelText: 'Username or Email Address',
+  const UsernameTextInputProps = {
+    id: 'username',
+    labelText: 'Username',
   };
   
   const PasswordProps = {
@@ -24,8 +24,8 @@ const SignInForm = ({onUserIdentifierChange, onPasswordChange}) => {
     <div style={{ marginBottom: '2rem' }}>
       <TextInput 
       required 
-      onChange={(e) => onUserIdentifierChange(e.target.value)} 
-      {...UserIdentifierTextInputProps} />
+      onChange={(e) => onUsernameChange(e.target.value)} 
+      {...UsernameTextInputProps} />
     </div>
 
       <TextInput
