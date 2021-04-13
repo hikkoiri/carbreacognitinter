@@ -42,3 +42,21 @@ docker build --pull --rm -f "Dockerfile" -t carbreacognitinter:latest "."
 docker run -p 8080:80 cabreacognitinter:latest
 ```
 (Make sure to pass the React configuration as build args or .env file during the docker build)
+
+
+## Open points
+
+Here is a list of thing, that need to / can be done to further improve the project:
+
+- [ ] give invalid warning on empty input field
+- [ ] disable submit after click and finally reenable it
+- [ ] fix `<a>` cursor
+- [ ] introduce success notifications for login & logout
+- [ ] rename user page to "My Profile"
+- [ ] remove email as sign in possibility 
+- [ ] add Logged in as xyz label
+- [ ] implement "forgot password" possibility
+- [ ] fix logout access denied error
+- [ ] introduce "thanks for registering" modal
+- [ ] build AWS CDK script for cognito user pool
+- [ ] implement the complete i18n part of the project
