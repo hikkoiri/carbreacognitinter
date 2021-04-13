@@ -49,7 +49,7 @@ docker run -p 8080:80 cabreacognitinter:latest
 Here is a list of thing, that need to / can be done to further improve the project:
 
 - [ ] give invalid warning on empty input field
-- [ ] disable submit after click and finally reenable it
+- [x] disable submit after click and finally reenable it
 - [ ] fix `<a>` cursor
 - [ ] introduce success notifications for login & logout
 - [x] rename user page to "My Profile"

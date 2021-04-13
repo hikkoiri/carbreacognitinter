@@ -12,7 +12,11 @@ import { Auth } from 'aws-amplify';
 
 const AuthenticationModal = ({ isOpen, close }) => {
 
+    //general
     const [isSignInInsteadOfSignUp, setIsSignInInsteadOfSignUp] = useState(true)
+    const [isRequestInProcessing, setIsRequestInProcessing] = useState(false)
+
+    // error notification
     const [errorNotificationMessage, setErrorNotificationMessage] = useState("")
     const [errorTimeStamp, setErrorTimeStamp] = useState("")
     const [isErrorNotificationOpen, setIsErrorNotificationOpen] = useState(false)
@@ -38,12 +42,14 @@ const AuthenticationModal = ({ isOpen, close }) => {
     }
 
     const startAuthentication = () => {
+
+        setIsRequestInProcessing(true)
+
         if (isSignInInsteadOfSignUp === true) {
             signIn()
         } else {
             signUp()
         }
-
     }
 
 
@@ -51,62 +57,32 @@ const AuthenticationModal = ({ isOpen, close }) => {
         //console.log(signInUsername)
         //console.log(signInPassword)
 
-        if (signInUsername === "") {
-            showErrorMessage("Username cannot be empty.")
-            return;
-        }
-
-        if (signInPassword === "") {
-            showErrorMessage("Password cannot be empty.")
-            return;
-        }
-
-        console.log("signing in")
-
         try {
+            if (signInUsername === "") {
+                showErrorMessage("Username cannot be empty.")
+                return;
+            }
+
+            if (signInPassword === "") {
+                showErrorMessage("Password cannot be empty.")
+                return;
+            }
+
+            console.log("signing in")
+
             await Auth.signIn(signInUsername, signInPassword);
             //signin succeded
             close()
         } catch (error) {
             showErrorMessage(error.message)
             console.log('error signing in', error);
+        } finally {
+            setIsRequestInProcessing(false)
         }
     }
 
     async function signUp() {
 
-        if (signUpUsername === "") {
-            showErrorMessage("Username cannot be empty.")
-            return;
-        }
-
-        if (signUpEmail === "") {
-            showErrorMessage("Email cannot be empty.")
-            return;
-        }
-
-        //check email validity
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if (!pattern.test(signUpEmail)) {
-            showErrorMessage("Please enter a valid email address.")
-            return;
-        }
-
-
-        if (signUpPassword === "") {
-            showErrorMessage("Password cannot be empty.")
-            return;
-        }
-
-        if (signUpRepeatPassword === "") {
-            showErrorMessage("Repeat Password cannot be empty.")
-            return;
-        }
-
-        if (signUpPassword !== signUpRepeatPassword) {
-            showErrorMessage("Entered passwords do not match.")
-            return;
-        }
 
         //console.log("signing up")
         //console.log(signUpUsername)
@@ -116,6 +92,39 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
 
         try {
+            if (signUpUsername === "") {
+                showErrorMessage("Username cannot be empty.")
+                return;
+            }
+
+            if (signUpEmail === "") {
+                showErrorMessage("Email cannot be empty.")
+                return;
+            }
+
+            //check email validity
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(signUpEmail)) {
+                showErrorMessage("Please enter a valid email address.")
+                return;
+            }
+
+
+            if (signUpPassword === "") {
+                showErrorMessage("Password cannot be empty.")
+                return;
+            }
+
+            if (signUpRepeatPassword === "") {
+                showErrorMessage("Repeat Password cannot be empty.")
+                return;
+            }
+
+            if (signUpPassword !== signUpRepeatPassword) {
+                showErrorMessage("Entered passwords do not match.")
+                return;
+            }
+
             await Auth.signUp({
                 username: signUpUsername,
                 password: signUpPassword,
@@ -129,8 +138,12 @@ const AuthenticationModal = ({ isOpen, close }) => {
         } catch (error) {
             showErrorMessage(error.message)
             console.log('error signing up:', error);
+        } finally {
+            setIsRequestInProcessing(false)
         }
     }
+
+
 
 
     const showErrorMessage = (message) => {
@@ -140,7 +153,6 @@ const AuthenticationModal = ({ isOpen, close }) => {
         setTimeout(function () {
             setIsErrorNotificationOpen(false)
         }, 5000);
-
     }
 
 
@@ -152,6 +164,7 @@ const AuthenticationModal = ({ isOpen, close }) => {
                 modalHeading={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
                 modalLabel="User action"
                 primaryButtonText={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
+                primaryButtonDisabled={isRequestInProcessing}
                 secondaryButtonText="Cancel"
                 onRequestSubmit={startAuthentication}>
 
