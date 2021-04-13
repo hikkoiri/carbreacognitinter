@@ -4,7 +4,7 @@ import { Content } from 'carbon-components-react';
 import GenericHeader from './components/GenericHeader';
 import { Route, Switch } from 'react-router-dom';
 import LandingPage from './content/LandingPage';
-import UserPage from './content/UserPage';
+import MyProfilePage from './content/MyProfilePage';
 
 import Amplify from 'aws-amplify';
 
@@ -32,7 +32,7 @@ class App extends Component {
         <Content>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/user" component={UserPage} />
+            <Route path="/myprofile" component={MyProfilePage} />
           </Switch>
         </Content>
       </>

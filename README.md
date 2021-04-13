@@ -52,7 +52,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] disable submit after click and finally reenable it
 - [ ] fix `<a>` cursor
 - [ ] introduce success notifications for login & logout
-- [ ] rename user page to "My Profile"
+- [x] rename user page to "My Profile"
 - [x] remove email as sign in possibility 
 - [ ] add Logged in as xyz label
 - [ ] implement "forgot password" possibility

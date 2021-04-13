@@ -9,7 +9,7 @@ import {
 import { Auth } from 'aws-amplify';
 import LogoutButton from '../../components/LogoutButton';
 
-const UserPage = () => {
+const MyProfilePage = () => {
 
   const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
 
@@ -27,8 +27,8 @@ const UserPage = () => {
 
   return (
     <>
-      <h1>User Page</h1>
-
+      <h1>My Profile</h1>
+      <br />
       <OrderedList>
         <ListItem>
           Username: {currentAuthenticatedUser ? currentAuthenticatedUser.username : ""}
@@ -40,7 +40,7 @@ const UserPage = () => {
           Email confirmed: {currentAuthenticatedUser ? currentAuthenticatedUser.attributes.email_verified.toString() : ""}
         </ListItem>
       </OrderedList>
-
+      <br />
       <LogoutButton></LogoutButton>
 
     </>
@@ -48,4 +48,4 @@ const UserPage = () => {
 
 }
 
-export default UserPage;
+export default MyProfilePage;

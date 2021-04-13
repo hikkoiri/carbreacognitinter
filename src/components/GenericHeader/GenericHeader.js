@@ -32,7 +32,7 @@ const GenericHeader = withRouter(({ history }) => {
     try {
       await Auth.currentAuthenticatedUser();
       console.log("already logged in. redirecting to user page")
-      history.push("/user");
+      history.push("/myprofile");
     } catch (error) {
       console.log('error signing in', error);
       console.log("not logged in yet. opening authentication modal")
