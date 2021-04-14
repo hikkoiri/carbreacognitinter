@@ -10,11 +10,11 @@ import { Auth } from 'aws-amplify';
 
 
 const AuthenticationModal = ({ isOpen,
-     close, 
-     signInComplete,
-     signUpComplete,
-     successNotification,
-      errorNotification }) => {
+    close,
+    signInComplete,
+    signUpComplete,
+    successNotification,
+    errorNotification }) => {
 
     //general
     const [isSignInInsteadOfSignUp, setIsSignInInsteadOfSignUp] = useState(true)
@@ -52,6 +52,7 @@ const AuthenticationModal = ({ isOpen,
 
 
     async function signIn() {
+
         //console.log(signInUsername)
         //console.log(signInPassword)
 
@@ -83,13 +84,11 @@ const AuthenticationModal = ({ isOpen,
 
     async function signUp() {
 
-
         //console.log("signing up")
         //console.log(signUpUsername)
         //console.log(signUpEmail)
         //console.log(signUpPassword)
         //console.log(signUpRepeatPassword)
-
 
         try {
             if (signUpUsername === "") {
@@ -145,12 +144,6 @@ const AuthenticationModal = ({ isOpen,
     }
 
 
-
-
-
-
-
-
     return (
         <div>
 
@@ -167,7 +160,7 @@ const AuthenticationModal = ({ isOpen,
 
                 {isSignInInsteadOfSignUp &&
                     <>
-                        <p> Don't have an account? <a onClick={toggle} >Create one</a></p>
+                        <p> Don't have an account? <span onClick={toggle} className="pointer" >Create one</span></p>
                         <SignInForm
                             onUsernameChange={(id) => setSignInUsername(id)}
                             onPasswordChange={(password) => setSignInPassword(password)}
@@ -177,7 +170,7 @@ const AuthenticationModal = ({ isOpen,
 
                 {!isSignInInsteadOfSignUp &&
                     <>
-                        <p> Already have an account? <a onClick={toggle} >Try signing in</a></p>
+                        <p> Already have an account? <span onClick={toggle} className="pointer" >Try signing in</span></p> 
                         <SignUpForm
                             onUsernameChange={(username) => setSignUpUsername(username)}
                             onEmailChange={(email) => setSignUpEmail(email)}
