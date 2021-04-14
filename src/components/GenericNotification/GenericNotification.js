@@ -6,8 +6,6 @@ import {
 
 const GenericNotification = ({ isNotificationOpen, notificationKind, notificationTitle, notificationMessage, notificationTimeStamp, setIsNotificationOpen }) => {
 
-
-
     return (
         <ToastNotification
             style={{

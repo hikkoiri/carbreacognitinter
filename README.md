@@ -53,7 +53,8 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [x] rename user page to "My Profile"
 - [x] remove email as sign in possibility 
 - [x] fix logout access denied error
-- [ ] introduce "thanks for registering" modal
+- [x] introduce "thanks for registering" modal
+- [ ] fix that form is cleared after error
 - [ ] implement "forgot password" functionality
 - [ ] fix `<a>` cursor
 - [ ] build AWS CDK script for cognito user pool

@@ -10,6 +10,7 @@ import {
   HeaderGlobalAction,
   HeaderNavigation,
   SkipToContent,
+  Modal,
 } from 'carbon-components-react';
 import {
   UserAvatar20,
@@ -29,6 +30,8 @@ const GenericHeader = withRouter(({ history,
   setCurrentAuthenticatedUser }) => {
 
   const [isAuthenticationModalOpen, setIsAuthenticationModalOpen] = useState(false)
+
+  const [isAccountVerificationModalOpen, setIsAccountVerificationModalOpen] = useState(false)
 
 
   async function userButtonOnClick(e, history) {
@@ -50,7 +53,7 @@ const GenericHeader = withRouter(({ history,
     setIsAuthenticationModalOpen(false)
   }
 
-  async function authenticationSuccess() {
+  async function signInComplete() {
     closeModal()
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -60,6 +63,10 @@ const GenericHeader = withRouter(({ history,
     }
   }
 
+  async function signUpComplete() {
+    closeModal()
+    setIsAccountVerificationModalOpen(true)
+  }
 
   return (
     <HeaderContainer
@@ -84,10 +91,23 @@ const GenericHeader = withRouter(({ history,
               </HeaderGlobalAction >
             </HeaderGlobalBar>
           </Header>
+          <Modal
+            open={isAccountVerificationModalOpen}
+            passiveModal
+            modalHeading="Congratulations. Your account get successfully created."
+            onRequestClose={() => setIsAccountVerificationModalOpen(false)}
+          >
+            Please check your email inbox for the account verification link we sent you.
+            <br />
+             Without a verified email address we can't grant you access to this page.
+             <br />
+             Thank you for understanding.
+            </Modal>
           <AuthenticationModal
             isOpen={isAuthenticationModalOpen}
             close={closeModal}
-            authenticationSuccess={authenticationSuccess}
+            signInComplete={signInComplete}
+            signUpComplete={signUpComplete}
             successNotification={(msg) => successNotification(msg)}
             errorNotification={(msg) => errorNotification(msg)}
           />
