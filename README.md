@@ -54,13 +54,13 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [x] remove email as sign in possibility 
 - [x] fix logout access denied error
 - [x] introduce "thanks for registering" modal
-- [ ] fix that form is cleared after error (wtf? why is that the case?)
+- [x] fix that form is cleared after error (wtf? why is that the case?)
 - [ ] implement "forgot password" functionality
 - [x] fix `<a>` cursor
 - [ ] build AWS CDK script for cognito user pool
 - [ ] implement the complete i18n part of the project
 - [ ] add password visibility toogle
-- [ ] fix notification countdown timer
-- [ ] give invalid warning on empty input field
+- [x] fix notification countdown timer
+- [ ] give inline invalid warning on empty input field
 - [ ] add Logged in as xyz label
 

@@ -27,7 +27,8 @@
     "react": "16.10.0",
     "react-dom": "16.10.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1"
+    "react-scripts": "4.0.1",
+    "react-toastify": "^7.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

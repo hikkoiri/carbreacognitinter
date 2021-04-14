@@ -7,7 +7,8 @@ import GenericHeader from './components/GenericHeader';
 import { Route, Switch } from 'react-router-dom';
 import LandingPage from './content/LandingPage';
 import MyProfilePage from './content/MyProfilePage';
-import GenericNotification from './components/GenericNotification';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 import Amplify from 'aws-amplify';
 
@@ -29,41 +30,19 @@ Amplify.configure({
 
 
 function App() {
-
-  // notification
-  const [notificationMessage, setNotificationMessage] = useState("")
-  const [notificationTimeStamp, setNotificationTimeStamp] = useState("")
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false)
-  const [notificationKind, setNotificationKind] = useState("info")
-  const [notificationTitle, setNotificationTitle] = useState("")
   
-  const showErrorNotification = (message) => {
-    setNotificationMessage(message)
-    setNotificationTitle("Error")
-    setNotificationKind("error")
-    displayNotification()
-  }
-
-  const showSuccessNotification = (message) => {
-    setNotificationMessage(message)
-    setNotificationTitle("Success")
-    setNotificationKind("success")
-    displayNotification()
-  }
-
-  const displayNotification = () => {
-    setNotificationTimeStamp(new Date().toLocaleString())
-    setIsNotificationOpen(true)
-
-    setTimeout(async function () {
-      setIsNotificationOpen(false)
-    }, 5000);
-  }
-
-
   //current user
   const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
 
+
+  const showErrorNotification = (message) => {
+    toast.error(message);
+  }
+
+  const showSuccessNotification = (message) => {
+    toast.success(message);
+
+  }
 
   return (
     <>
@@ -73,16 +52,11 @@ function App() {
         setCurrentAuthenticatedUser={(user) => setCurrentAuthenticatedUser(user)}
       />
 
+      <ToastContainer style={{
+        marginTop: '3rem'
+      }} />
 
-      <GenericNotification
-        isNotificationOpen={isNotificationOpen}
-        notificationKind={notificationKind}
-        notificationTitle={notificationTitle}
-        notificationMessage={notificationMessage}
-        notificationTimeStamp={notificationTimeStamp}
-      />
 
-      
       <Content>
         <Switch>
           <Route exact path="/" component={LandingPage} />
