@@ -1,26 +1,11 @@
-import React, {
-  useState,
-  useEffect
-} from 'react';
+import React from 'react';
 import {
   OrderedList,
   ListItem,
 } from 'carbon-components-react';
-import { Auth } from 'aws-amplify';
 import LogoutButton from '../../components/LogoutButton';
 
-const MyProfilePage = ({successNotification}) => {
-
-  const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
-
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await Auth.currentAuthenticatedUser()
-      setCurrentAuthenticatedUser(user)
-      //console.log(user)
-    }
-    getUser()
-  }, [])
+const MyProfilePage = ({ successNotification, currentAuthenticatedUser }) => {
 
 
   return (

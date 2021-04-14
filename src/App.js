@@ -61,11 +61,16 @@ function App() {
   }
 
 
+  //current user
+  const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
+
+
   return (
     <>
       <GenericHeader
         successNotification={(msg) => showSuccessNotification(msg)}
         errorNotification={(msg) => showErrorNotification(msg)}
+        setCurrentAuthenticatedUser={(user) => setCurrentAuthenticatedUser(user)}
       />
       <GenericNotification
         isNotificationOpen={isNotificationOpen}
@@ -78,7 +83,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/myprofile"
-            render={() => <MyProfilePage successNotification={(msg) => showSuccessNotification(msg)} />}
+            render={() => <MyProfilePage
+              successNotification={(msg) => showSuccessNotification(msg)}
+              currentAuthenticatedUser={currentAuthenticatedUser}
+            />}
           />
         </Switch>
       </Content>

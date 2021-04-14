@@ -48,17 +48,18 @@ docker run -p 8080:80 cabreacognitinter:latest
 
 Here is a list of thing, that need to / can be done to further improve the project:
 
-- [ ] give invalid warning on empty input field
 - [x] disable submit after click and finally reenable it
-- [ ] fix `<a>` cursor
 - [x] introduce success notifications for login & logout
 - [x] rename user page to "My Profile"
 - [x] remove email as sign in possibility 
-- [ ] add Logged in as xyz label
-- [ ] implement "forgot password" functionality
 - [x] fix logout access denied error
 - [ ] introduce "thanks for registering" modal
+- [ ] implement "forgot password" functionality
+- [ ] fix `<a>` cursor
 - [ ] build AWS CDK script for cognito user pool
 - [ ] implement the complete i18n part of the project
 - [ ] add password visibility toogle
 - [ ] fix notification countdown timer
+- [ ] give invalid warning on empty input field
+- [ ] add Logged in as xyz label
+

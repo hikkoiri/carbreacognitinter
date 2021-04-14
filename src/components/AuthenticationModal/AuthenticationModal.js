@@ -9,7 +9,7 @@ import SignUpForm from '../SignUpForm';
 import { Auth } from 'aws-amplify';
 
 
-const AuthenticationModal = ({ isOpen, close, successNotification, errorNotification }) => {
+const AuthenticationModal = ({ isOpen, close, authenticationSuccess, successNotification, errorNotification }) => {
 
     //general
     const [isSignInInsteadOfSignUp, setIsSignInInsteadOfSignUp] = useState(true)
@@ -66,7 +66,7 @@ const AuthenticationModal = ({ isOpen, close, successNotification, errorNotifica
             await Auth.signIn(signInUsername, signInPassword);
 
             //signin succeded
-            close()
+            authenticationSuccess()
             successNotification("Sign In succeeded")
         } catch (error) {
             errorNotification(error.message)

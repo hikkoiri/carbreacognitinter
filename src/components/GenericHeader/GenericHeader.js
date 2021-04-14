@@ -8,6 +8,7 @@ import {
   HeaderMenuButton,
   HeaderGlobalBar,
   HeaderGlobalAction,
+  HeaderNavigation,
   SkipToContent,
 } from 'carbon-components-react';
 import {
@@ -22,7 +23,10 @@ import { Auth } from 'aws-amplify';
 
 
 
-const GenericHeader = withRouter(({ history, successNotification, errorNotification }) => {
+const GenericHeader = withRouter(({ history,
+  successNotification,
+  errorNotification,
+  setCurrentAuthenticatedUser }) => {
 
   const [isAuthenticationModalOpen, setIsAuthenticationModalOpen] = useState(false)
 
@@ -30,7 +34,8 @@ const GenericHeader = withRouter(({ history, successNotification, errorNotificat
   async function userButtonOnClick(e, history) {
     // check is user is logged in
     try {
-      await Auth.currentAuthenticatedUser();
+      const user = await Auth.currentAuthenticatedUser();
+      setCurrentAuthenticatedUser(user)
       console.log("already logged in. redirecting to user page")
       history.push("/myprofile");
     } catch (error) {
@@ -43,6 +48,16 @@ const GenericHeader = withRouter(({ history, successNotification, errorNotificat
   const closeModal = () => {
     console.log("closing modal")
     setIsAuthenticationModalOpen(false)
+  }
+
+  async function authenticationSuccess() {
+    closeModal()
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setCurrentAuthenticatedUser(user)
+    } catch (error) {
+      console.log('error signing in', error);
+    }
   }
 
 
@@ -60,6 +75,9 @@ const GenericHeader = withRouter(({ history, successNotification, errorNotificat
               CARBREACOGNITINTER
         </HeaderName>
 
+
+            <HeaderNavigation aria-label="" />
+
             <HeaderGlobalBar>
               <HeaderGlobalAction aria-label="" onClick={(e) => userButtonOnClick(e, history)}>
                 <UserAvatar20 />
@@ -69,6 +87,7 @@ const GenericHeader = withRouter(({ history, successNotification, errorNotificat
           <AuthenticationModal
             isOpen={isAuthenticationModalOpen}
             close={closeModal}
+            authenticationSuccess={authenticationSuccess}
             successNotification={(msg) => successNotification(msg)}
             errorNotification={(msg) => errorNotification(msg)}
           />
