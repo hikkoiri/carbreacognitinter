@@ -22,7 +22,7 @@ import { Auth } from 'aws-amplify';
 
 
 
-const GenericHeader = withRouter(({ history }) => {
+const GenericHeader = withRouter(({ history, successNotification, errorNotification }) => {
 
   const [isAuthenticationModalOpen, setIsAuthenticationModalOpen] = useState(false)
 
@@ -69,6 +69,8 @@ const GenericHeader = withRouter(({ history }) => {
           <AuthenticationModal
             isOpen={isAuthenticationModalOpen}
             close={closeModal}
+            successNotification={(msg) => successNotification(msg)}
+            errorNotification={(msg) => errorNotification(msg)}
           />
         </>
       )

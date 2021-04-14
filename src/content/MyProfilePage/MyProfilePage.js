@@ -9,7 +9,7 @@ import {
 import { Auth } from 'aws-amplify';
 import LogoutButton from '../../components/LogoutButton';
 
-const MyProfilePage = () => {
+const MyProfilePage = ({successNotification}) => {
 
   const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
 
@@ -21,8 +21,6 @@ const MyProfilePage = () => {
     }
     getUser()
   }, [])
-
-
 
 
   return (
@@ -41,7 +39,7 @@ const MyProfilePage = () => {
         </ListItem>
       </OrderedList>
       <br />
-      <LogoutButton></LogoutButton>
+      <LogoutButton successNotification={(msg) => successNotification(msg)} />
 
     </>
   );

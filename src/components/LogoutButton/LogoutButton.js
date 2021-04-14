@@ -8,14 +8,14 @@ import {
 import { Auth } from 'aws-amplify';
 
 
-const LogoutButton = withRouter(({ history }) => {
+const LogoutButton = withRouter(({ history, successNotification }) => {
 
     async function logout() {
         try {
             await Auth.signOut();
             console.log('successfully signed out');
+            successNotification("Sign Out succeeded")
             history.push("/");
-
         } catch (error) {
             console.log('error signing out: ', error);
         }

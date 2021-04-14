@@ -51,7 +51,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] give invalid warning on empty input field
 - [x] disable submit after click and finally reenable it
 - [ ] fix `<a>` cursor
-- [ ] introduce success notifications for login & logout
+- [x] introduce success notifications for login & logout
 - [x] rename user page to "My Profile"
 - [x] remove email as sign in possibility 
 - [ ] add Logged in as xyz label
@@ -61,3 +61,4 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [ ] build AWS CDK script for cognito user pool
 - [ ] implement the complete i18n part of the project
 - [ ] add password visibility toogle
+- [ ] fix notification countdown timer

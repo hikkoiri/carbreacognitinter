@@ -3,24 +3,17 @@ import React, {
 } from 'react';
 import {
     Modal,
-    ToastNotification,
 } from 'carbon-components-react';
 import SignInForm from '../SignInForm';
 import SignUpForm from '../SignUpForm';
 import { Auth } from 'aws-amplify';
 
 
-const AuthenticationModal = ({ isOpen, close }) => {
+const AuthenticationModal = ({ isOpen, close, successNotification, errorNotification }) => {
 
     //general
     const [isSignInInsteadOfSignUp, setIsSignInInsteadOfSignUp] = useState(true)
     const [isRequestInProcessing, setIsRequestInProcessing] = useState(false)
-
-    // error notification
-    const [errorNotificationMessage, setErrorNotificationMessage] = useState("")
-    const [errorTimeStamp, setErrorTimeStamp] = useState("")
-    const [isErrorNotificationOpen, setIsErrorNotificationOpen] = useState(false)
-
 
     //sign in 
     const [signInUsername, setSignInUsername] = useState('')
@@ -59,22 +52,24 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
         try {
             if (signInUsername === "") {
-                showErrorMessage("Username cannot be empty.")
+                errorNotification("Username cannot be empty.")
                 return;
             }
 
             if (signInPassword === "") {
-                showErrorMessage("Password cannot be empty.")
+                errorNotification("Password cannot be empty.")
                 return;
             }
 
             console.log("signing in")
 
             await Auth.signIn(signInUsername, signInPassword);
+
             //signin succeded
             close()
+            successNotification("Sign In succeeded")
         } catch (error) {
-            showErrorMessage(error.message)
+            errorNotification(error.message)
             console.log('error signing in', error);
         } finally {
             setIsRequestInProcessing(false)
@@ -93,35 +88,35 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
         try {
             if (signUpUsername === "") {
-                showErrorMessage("Username cannot be empty.")
+                errorNotification("Username cannot be empty.")
                 return;
             }
 
             if (signUpEmail === "") {
-                showErrorMessage("Email cannot be empty.")
+                errorNotification("Email cannot be empty.")
                 return;
             }
 
             //check email validity
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
             if (!pattern.test(signUpEmail)) {
-                showErrorMessage("Please enter a valid email address.")
+                errorNotification("Please enter a valid email address.")
                 return;
             }
 
 
             if (signUpPassword === "") {
-                showErrorMessage("Password cannot be empty.")
+                errorNotification("Password cannot be empty.")
                 return;
             }
 
             if (signUpRepeatPassword === "") {
-                showErrorMessage("Repeat Password cannot be empty.")
+                errorNotification("Repeat Password cannot be empty.")
                 return;
             }
 
             if (signUpPassword !== signUpRepeatPassword) {
-                showErrorMessage("Entered passwords do not match.")
+                errorNotification("Entered passwords do not match.")
                 return;
             }
 
@@ -135,8 +130,9 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
             //signup succeded
             close()
+            successNotification("Sign Up succeeded")
         } catch (error) {
-            showErrorMessage(error.message)
+            errorNotification(error.message)
             console.log('error signing up:', error);
         } finally {
             setIsRequestInProcessing(false)
@@ -146,18 +142,13 @@ const AuthenticationModal = ({ isOpen, close }) => {
 
 
 
-    const showErrorMessage = (message) => {
-        setErrorNotificationMessage(message)
-        setErrorTimeStamp(new Date().toLocaleString())
-        setIsErrorNotificationOpen(true)
-        setTimeout(function () {
-            setIsErrorNotificationOpen(false)
-        }, 5000);
-    }
+
+
 
 
     return (
         <div>
+
             <Modal
                 open={isOpen}
                 onRequestClose={close}
@@ -192,17 +183,10 @@ const AuthenticationModal = ({ isOpen, close }) => {
                 }
 
             </Modal>
-            <ToastNotification
-                style={{ marginTop: '1rem', marginRight: '1rem', position: 'absolute', right: '0px', display: isErrorNotificationOpen ? 'flex' : 'none' }}
-                kind="error"
-                title="An error occured!"
-                caption={errorNotificationMessage}
-                subtitle={errorTimeStamp}
-                timeout={0}
-                onCloseButtonClick={() => setIsErrorNotificationOpen(false)}
-            />
         </div>
     )
 }
+
+
 
 export default AuthenticationModal;
