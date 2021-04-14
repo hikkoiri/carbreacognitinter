@@ -36,17 +36,13 @@ function App() {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false)
   const [notificationKind, setNotificationKind] = useState("info")
   const [notificationTitle, setNotificationTitle] = useState("")
-
-
-    /*
+  
   const showErrorNotification = (message) => {
     setNotificationMessage(message)
     setNotificationTitle("Error")
     setNotificationKind("error")
     displayNotification()
   }
-
-
 
   const showSuccessNotification = (message) => {
     setNotificationMessage(message)
@@ -59,21 +55,11 @@ function App() {
     setNotificationTimeStamp(new Date().toLocaleString())
     setIsNotificationOpen(true)
 
-    setTimeout(function () {
+    setTimeout(async function () {
       setIsNotificationOpen(false)
     }, 5000);
   }
-*/
 
-
-
-function showSuccessNotification (msg){
-  console.log("that would be a success toast:"+ msg)
-}
-
-function showErrorNotification (msg){
-  console.log("that would be a error toast:"+ msg)
-}
 
   //current user
   const [currentAuthenticatedUser, setCurrentAuthenticatedUser] = useState(undefined)
@@ -86,6 +72,8 @@ function showErrorNotification (msg){
         errorNotification={(msg) => showErrorNotification(msg)}
         setCurrentAuthenticatedUser={(user) => setCurrentAuthenticatedUser(user)}
       />
+
+
       <GenericNotification
         isNotificationOpen={isNotificationOpen}
         notificationKind={notificationKind}
@@ -93,6 +81,8 @@ function showErrorNotification (msg){
         notificationMessage={notificationMessage}
         notificationTimeStamp={notificationTimeStamp}
       />
+
+      
       <Content>
         <Switch>
           <Route exact path="/" component={LandingPage} />
