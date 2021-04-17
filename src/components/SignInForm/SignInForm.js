@@ -6,7 +6,7 @@ import {
 
 
 
-const SignInForm = ({onUsernameChange, onPasswordChange}) => {
+const SignInForm = ({onUsernameChange, onPasswordChange, startPasswordReset}) => {
   
   const UsernameTextInputProps = {
     id: 'username',
@@ -17,8 +17,6 @@ const SignInForm = ({onUsernameChange, onPasswordChange}) => {
     id: 'password',
     labelText: 'Password',
   };
-
-
   
   return (<Form style={{ marginTop: '2rem' }}>
     <div style={{ marginBottom: '2rem' }}>
@@ -34,6 +32,8 @@ const SignInForm = ({onUsernameChange, onPasswordChange}) => {
         onChange={(e) => onPasswordChange(e.target.value)} 
         {...PasswordProps}
       />
+      <br/>
+      Forgot your password? <span onClick={startPasswordReset} className="pointer" > Click here</span>
   </Form>
   )};
 export default SignInForm;

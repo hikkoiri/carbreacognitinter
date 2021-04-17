@@ -7,6 +7,7 @@ import {
 import SignInForm from '../SignInForm';
 import SignUpForm from '../SignUpForm';
 import { Auth } from 'aws-amplify';
+import ResetPasswordForm from '../ResetPasswordForm';
 
 
 const AuthenticationModal = ({ isOpen,
@@ -17,7 +18,10 @@ const AuthenticationModal = ({ isOpen,
     errorNotification }) => {
 
     //general
-    const [isSignInInsteadOfSignUp, setIsSignInInsteadOfSignUp] = useState(true)
+    const [currentAuthenticationMode, setCurrentAuthenticationMode] = useState(1)
+    // 1 -> Sign In
+    // 2 -> Sign Up
+    // 3 -> Reset Password
     const [isRequestInProcessing, setIsRequestInProcessing] = useState(false)
 
     //sign in 
@@ -30,26 +34,41 @@ const AuthenticationModal = ({ isOpen,
     const [signUpPassword, setSignUpPassword] = useState('')
     const [signUpRepeatPassword, setSignUpRepeatPassword] = useState('')
 
+    //reset password
+    const [resetPasswordProgress, setResetPasswordProgress] = useState(0)
+    const [resetPasswordUsername, setResetPasswordUsername] = useState('')
+    const [resetPasswordVerificationCode, setResetPasswordVerificationCode] = useState('')
+    const [resetPasswordNewPassword, setResetPasswordNewPassword] = useState('')
+    const [resetPasswordNewPasswordRepeat, setResetPasswordNewPasswordRepeat] = useState('')
 
-    const toggle = () => {
-        if (isSignInInsteadOfSignUp === true) {
-            setIsSignInInsteadOfSignUp(false)
-        } else {
-            setIsSignInInsteadOfSignUp(true)
-        }
-    }
+
+
 
     const startAuthentication = () => {
 
         setIsRequestInProcessing(true)
 
-        if (isSignInInsteadOfSignUp === true) {
-            signIn()
-        } else {
-            signUp()
+        switch (currentAuthenticationMode) {
+            case 1:
+                // sign in 
+                signIn()
+                break;
+            case 2:
+                // sign up
+                signUp()
+                break;
+            case 3:
+                // reset password
+                if (resetPasswordProgress === 0) {
+                    resetPassword()
+                } else {
+                    resetPasswordSubmit()
+                }
+                break;
+            default:
+            //should never enter here
         }
     }
-
 
     async function signIn() {
 
@@ -67,19 +86,23 @@ const AuthenticationModal = ({ isOpen,
                 return;
             }
 
-            console.log("signing in")
-
-            await Auth.signIn(signInUsername, signInPassword);
-
-            //signin succeded
-            signInComplete()
-            successNotification("Sign In succeeded")
+            await signInWithCredentials(signInUsername,signInPassword)
+            
         } catch (error) {
             errorNotification(error.message)
             console.log('error signing in', error);
         } finally {
             setIsRequestInProcessing(false)
         }
+    }
+
+    async function signInWithCredentials(username, password){
+        console.log("signing in")
+
+        await Auth.signIn(username, password);
+        //signin succeded
+        signInComplete()
+        successNotification("Sign In succeeded")
     }
 
     async function signUp() {
@@ -143,6 +166,81 @@ const AuthenticationModal = ({ isOpen,
         }
     }
 
+    async function resetPassword() {
+        try {
+            console.log("starting password reset")
+            if (resetPasswordUsername === "") {
+                errorNotification("Username cannot be empty.")
+                return;
+            }
+
+            await Auth.forgotPassword(resetPasswordUsername)
+
+            setResetPasswordProgress(1)
+
+        } catch (error) {
+            errorNotification(error.message)
+            console.log('error sending verification code:', error);
+        } finally {
+            setIsRequestInProcessing(false)
+        }
+    }
+
+    async function resetPasswordSubmit() {
+        try {
+            console.log("submitting password reset")
+
+            if (resetPasswordVerificationCode === "") {
+                errorNotification("Verification code cannot be empty.")
+                return;
+            }
+            if (resetPasswordNewPassword === "") {
+                errorNotification("New password cannot be empty.")
+                return;
+            }
+
+            if (resetPasswordNewPasswordRepeat === "") {
+                errorNotification("Repeat password cannot be empty.")
+                return;
+            }
+
+            if (resetPasswordNewPasswordRepeat !== resetPasswordNewPassword) {
+                errorNotification("Entered passwords do not match.")
+                return;
+            }
+
+            await Auth.forgotPasswordSubmit(resetPasswordUsername, resetPasswordVerificationCode, resetPasswordNewPassword)
+            successNotification("Password Reset succeeded")
+            signInWithCredentials(resetPasswordUsername,resetPasswordNewPassword)
+            
+        } catch (error) {
+            errorNotification(error.message)
+            console.log('error resetting password: ', error);
+        } finally {
+            setIsRequestInProcessing(false)
+        }      
+    }
+
+
+    function getActionName() {
+        switch (currentAuthenticationMode) {
+            case 1:
+                return "Sign In"
+            case 2:
+                return "Sign Up"
+            case 3:
+
+                if (resetPasswordProgress === 0) {
+                    return "Request Verification Code for Password Reset"
+                } else {
+                    return "Reset Password"
+                }
+
+            default:
+            //should never enter here
+        }
+        return { currentAuthenticationMode }
+    }
 
     return (
         <div>
@@ -150,27 +248,29 @@ const AuthenticationModal = ({ isOpen,
             <Modal
                 open={isOpen}
                 onRequestClose={close}
-                modalHeading={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
+                modalHeading={getActionName()}
                 modalLabel="User action"
-                primaryButtonText={isSignInInsteadOfSignUp ? "Sign In" : "Sign Up"}
+                primaryButtonText={getActionName()}
                 primaryButtonDisabled={isRequestInProcessing}
                 secondaryButtonText="Cancel"
                 onRequestSubmit={startAuthentication}>
 
 
-                {isSignInInsteadOfSignUp &&
+                {currentAuthenticationMode === 1 &&
                     <>
-                        <p> Don't have an account? <span onClick={toggle} className="pointer" >Create one</span></p>
+                        <p> Don't have an account? <span onClick={() => setCurrentAuthenticationMode(2)}
+                            className="pointer" >Create one</span></p>
                         <SignInForm
-                            onUsernameChange={(id) => setSignInUsername(id)}
+                            onUsernameChange={(username) => setSignInUsername(username)}
                             onPasswordChange={(password) => setSignInPassword(password)}
+                            startPasswordReset={() => setCurrentAuthenticationMode(3)}
                         />
                     </>
                 }
 
-                {!isSignInInsteadOfSignUp &&
+                {currentAuthenticationMode === 2 &&
                     <>
-                        <p> Already have an account? <span onClick={toggle} className="pointer" >Try signing in</span></p> 
+                        <p> Already have an account? <span onClick={() => setCurrentAuthenticationMode(1)} className="pointer" >Try signing in</span></p>
                         <SignUpForm
                             onUsernameChange={(username) => setSignUpUsername(username)}
                             onEmailChange={(email) => setSignUpEmail(email)}
@@ -178,6 +278,16 @@ const AuthenticationModal = ({ isOpen,
                             onRepeatPasswordChange={(repeatedPassword) => setSignUpRepeatPassword(repeatedPassword)}
                         />
                     </>
+                }
+
+                {currentAuthenticationMode === 3 &&
+                    <ResetPasswordForm
+                        resetPasswordProgress={resetPasswordProgress}
+                        onUsernameChange={(username) => setResetPasswordUsername(username)}
+                        onVerificationCodeChange={(verificationCode) => setResetPasswordVerificationCode(verificationCode)}
+                        onPasswordChange={(password) => setResetPasswordNewPassword(password)}
+                        onRepeatPasswordChange={(repeatedPassword) => setResetPasswordNewPasswordRepeat(repeatedPassword)}
+                    />
                 }
 
             </Modal>

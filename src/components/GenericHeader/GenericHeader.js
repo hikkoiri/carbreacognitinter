@@ -5,11 +5,8 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
-  HeaderMenuButton,
   HeaderGlobalBar,
   HeaderGlobalAction,
-  HeaderNavigation,
-  SkipToContent,
   Modal,
 } from 'carbon-components-react';
 import {
@@ -73,17 +70,16 @@ const GenericHeader = withRouter(({ history,
       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
         <>
           <Header aria-label="">
-            <SkipToContent />
+            {/*<SkipToContent />
             <HeaderMenuButton aria-label=""
               onClick={onClickSideNavExpand}
               isActive={isSideNavExpanded}
-            />
+            />*/}
             <HeaderName element={Link} to="/" prefix="Home of">
               CARBREACOGNITINTER
         </HeaderName>
 
-
-            <HeaderNavigation aria-label="" />
+            {/*<HeaderNavigation aria-label="" />*/}
 
             <HeaderGlobalBar>
               <HeaderGlobalAction aria-label="" onClick={(e) => userButtonOnClick(e, history)}>
