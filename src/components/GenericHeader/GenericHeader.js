@@ -1,5 +1,5 @@
 import React, {
-  useState,
+  useState
 } from 'react';
 import {
   Header,
@@ -16,8 +16,11 @@ import {
   Link,
   withRouter
 } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import AuthenticationModal from '../AuthenticationModal';
 import { Auth } from 'aws-amplify';
+import ReactCountryFlag from "react-country-flag"
+
 
 
 
@@ -65,6 +68,8 @@ const GenericHeader = withRouter(({ history,
     setIsAccountVerificationModalOpen(true)
   }
 
+  const { t, i18n } = useTranslation();
+
   return (
     <HeaderContainer
       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -82,6 +87,12 @@ const GenericHeader = withRouter(({ history,
             {/*<HeaderNavigation aria-label="" />*/}
 
             <HeaderGlobalBar>
+              <HeaderGlobalAction aria-label="" onClick={() => i18n.changeLanguage('en')}>
+                <ReactCountryFlag countryCode="US" svg />
+              </HeaderGlobalAction >
+              <HeaderGlobalAction aria-label="" onClick={() => i18n.changeLanguage('de')}>
+                <ReactCountryFlag countryCode="DE" svg />
+              </HeaderGlobalAction >
               <HeaderGlobalAction aria-label="" onClick={(e) => userButtonOnClick(e, history)}>
                 <UserAvatar20 />
               </HeaderGlobalAction >

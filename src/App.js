@@ -1,5 +1,6 @@
 import React, {
-  useState
+  useState,
+  Suspense
 } from 'react';
 import './app.scss';
 import { Content } from 'carbon-components-react';
@@ -45,7 +46,7 @@ function App() {
   }
 
   return (
-    <>
+    <Suspense fallback="loading">
       <GenericHeader
         successNotification={(msg) => showSuccessNotification(msg)}
         errorNotification={(msg) => showErrorNotification(msg)}
@@ -55,7 +56,6 @@ function App() {
       <ToastContainer style={{
         marginTop: '3rem'
       }} />
-
 
       <Content>
         <Switch>
@@ -68,7 +68,7 @@ function App() {
           />
         </Switch>
       </Content>
-    </>
+    </Suspense>
   );
 }
 

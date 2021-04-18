@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter as Router } from 'react-router-dom';
 
+import './i18n'
+
 ReactDOM.render(
   <Router>
     <App />
