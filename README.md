@@ -1,6 +1,6 @@
 ## Carbreacognitinter
 
-> First of all, this project is still under active development and not even close to a pre-alpha version. So be patient.
+> Update (19.04.21): The project is finally in shape and at a point where I can share it with the public wihtout having second thoughts. A deployed version of the project can be found at [carbreacognitinter.carlo-hildebrandt.de/](http://carbreacognitinter.carlo-hildebrandt.de/).
 
 ## What the hell is Carbreacognitinter???
 
