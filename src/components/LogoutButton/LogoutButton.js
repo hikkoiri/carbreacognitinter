@@ -16,7 +16,7 @@ const LogoutButton = withRouter(({ history, successNotification }) => {
         try {
             await Auth.signOut();
             console.log('successfully signed out');
-            successNotification("Sign Out succeeded")
+            successNotification(t("logout.successnotification"))
             history.push("/");
         } catch (error) {
             console.log('error signing out: ', error);
@@ -24,7 +24,7 @@ const LogoutButton = withRouter(({ history, successNotification }) => {
     }
 
     return (
-        <Button kind="danger" onClick={logout}>{t("logout")}</Button>
+        <Button kind="danger" onClick={logout}>{t("logout.label")}</Button>
     )
 })
 

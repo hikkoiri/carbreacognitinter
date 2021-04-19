@@ -8,7 +8,10 @@
     "email_address": "Email Address:",
     "email_verified": "Email verified:"
   },
-  "logout": "Logout",
+  "logout":{
+    "label":"Logout",
+    "successnotification":"Sign Out succeeded."
+  } ,
   "genericheader": {
     "name": {
       "prefix": "Home of",
@@ -41,7 +44,7 @@
       },
       "passwordresetreferrer":{
         "question":"Forgot your password? ",
-        "link":" Click here"
+        "link":"Click here"
       }
     },
     "signup": {

@@ -2,9 +2,116 @@
   "landingpage": {
     "title": "Startseite"
   },
-  "title": "Willkommen zu react und react-i18next",
-  "description": {
-    "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> und speichere um neuzuladen.",
-    "part2": "Wechsle die Sprache zwischen deutsch und englisch mit Hilfe der beiden Schalter."
+  "myprofilepage": {
+    "title": "Mein Profil",
+    "username": "Benutzername:",
+    "email_address": "Email Adresse:",
+    "email_verified": "Email bestätigt:"
+  },
+  "logout":{
+    "label":"Abmelden",
+    "successnotification":"Abmeldung erfolgreich."
+  },
+  "genericheader": {
+    "name": {
+      "prefix": "Zuhause von",
+      "suffix": "CARBREACOGNITINTER"
+    },
+    "accountverificationmodal": {
+      "heading": "Herzlichen Glückwunsch. Ihr Konto wurde erfolgreich erstellt.",
+      "text": {
+        "1": "Bitte bestätigen Sie ihren Account mithilfe des Verifizierungslinks in dem angegebenen Email Postfach.",
+        "2": "Ohne verifizierte Email Adresse können wir ihnen leider keinen Zugriff auf die Webseite gewähren.",
+        "3": "Vielen Dank für ihr Verständnis."
+      }
+    }
+  },
+  "authenticationModal": {
+    "label":"Benutzerinteraktion",
+    "cancelbutton":"Abbrechen",
+    "signin": {
+      "actionname":"Anmelden",
+      "errornotification": {
+        "usernamemissing": "Benutzername kann nicht leer sein.",
+        "passwordmissing": "Passwort kann nicht leer sein."
+      },
+      "successnotification": {
+        "siginsuceeded": "Anmeldung erfolgreich."
+      },
+      "signupreferrer":{
+        "question":"Haben Sie noch keinen Account? ",
+        "link":"Erstellen Sie einen"
+      },
+      "passwordresetreferrer":{
+        "question":"Passwort vergessen? ",
+        "link":"Hier klicken"
+      }
+    },
+    "signup": {
+      "actionname":"Registrieren",
+      "errornotification": {
+        "usernamemissing": "Benutzername kann nicht leer sein.",
+        "emailmissing": "Email Adresse kann nicht leer sein.",
+        "emailinvalid": "Bitte eine valide Email Adresse angeben.",
+        "passwordmissing": "Passwort kann nicht leer sein.",
+        "repeatpasswordmissing": "Passwort Wiederholung kann nicht leer sein.",
+        "passwordmismatch": "Passwörter stimmen nicht überein."
+      },
+      "successnotification": {
+        "siginsuceeded": "Registrierung erfolgreich. Verifizieren Sie ihren Account als Nächstes."
+      },
+      "signinreferrer":{
+        "question":"Haben Sie bereits ein Konto? ",
+        "link":"Hier anmelden"
+      }
+    },
+    "passwordreset": {
+      "actionname":"Passwortwiederherstellungscode beantragen",
+      "errornotification": {
+        "usernamemissing": "Benutzername kann nicht leer sein."
+      }
+    },
+    "passwordresetsubmit": {
+      "actionname":"Passwort zurücksetzen",
+      "errornotification": {
+        "codemissing": "Wiederherstellungscode kann nicht leer sein.",
+        "passwordmissing": "Neues Passwort kann nicht leer sein.",
+        "repeatpasswordmissing": "Passwort Wiederholung kann nicht leer sein.",
+        "passwordmismatch": "Passwörter stimmen nicht überein."
+      },
+      "successnotification": {
+        "suceeded": "Passwort erfolgreich zurückgesetzt."
+      }
+    }
+  },
+  "signinform":{
+    "inputlabel":{
+      "username":"Benutzername",
+      "password": "Passwort"
+    }
+  },
+  "signupform":{
+    "inputlabel":{
+      "username":"Benutzername",
+      "email": "Email Adresse",
+      "password": "Passwort",
+      "repeatpassword": "Passwort Wiederholung"
+    }
+  },
+  "resetpasswordform":{
+    "inputlabel":{
+      "username":"Benutzername",
+      "verificationcode": "Wiederherstellungscode",
+      "password": "Neues Passwort",
+      "repeatpassword": "Passwort Wiederholung"
+    },
+    "progressindicator":{
+      "step1": "Schritt 1: Wiederherstellungscode per Mail versenden",
+      "step2": "Schritt 2: Passwort zurücksetzen"
+    },
+    "notification":{
+      "subtitle": "Bitte überprüfe den Posteingang des verknüften Email Accounts.",
+      "title": "Wiederherstellungscode versandt"
+    }
   }
 }
