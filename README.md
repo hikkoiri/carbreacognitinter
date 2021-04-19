@@ -57,7 +57,7 @@ Here is a list of thing, that need to / can be done to further improve the proje
 - [x] fix that form is cleared after error (wtf? why is that the case?)
 - [x] fix `<a>` cursor
 - [x] implement "forgot password" functionality
-- [ ] implement the complete i18n part of the project
+- [x] implement the complete i18n part of the project
 - [x] fix notification countdown timer
 - [ ] build AWS CDK script for cognito user pool
 - [ ] give inline invalid warning on empty input field

@@ -7732,6 +7732,13 @@
     "run-node" "^1.0.0"
     "slash" "^2.0.0"
 
+"i18next-browser-languagedetector@^6.1.0":
+  "integrity" "sha512-NXbr/qPqkg6VyUwPrzmVOAafqIk1zdjzhYVxZWoSi338XEGmuOeroEglLdR8nJUJcf5BfOSHva80tqCPwXFTFQ=="
+  "resolved" "https://registry.npmjs.org/i18next-browser-languagedetector/-/i18next-browser-languagedetector-6.1.0.tgz"
+  "version" "6.1.0"
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
 "i18next-http-backend@^1.2.1":
   "integrity" "sha512-9L2sa+wybqi57/+VsrJPo5DCI7WLoudaK12xz0okYSmsi3Izyj7sCgrYL52WHy/O3BFY9HGORBwSwlD1WYuH6Q=="
   "resolved" "https://registry.npmjs.org/i18next-http-backend/-/i18next-http-backend-1.2.1.tgz"
