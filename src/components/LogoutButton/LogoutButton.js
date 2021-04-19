@@ -6,9 +6,11 @@ import {
     withRouter
 } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-
+import { useTranslation } from 'react-i18next';
 
 const LogoutButton = withRouter(({ history, successNotification }) => {
+
+    const { t } = useTranslation();
 
     async function logout() {
         try {
@@ -22,7 +24,7 @@ const LogoutButton = withRouter(({ history, successNotification }) => {
     }
 
     return (
-        <Button kind="danger" onClick={logout}>Logout</Button>
+        <Button kind="danger" onClick={logout}>{t("logout")}</Button>
     )
 })
 

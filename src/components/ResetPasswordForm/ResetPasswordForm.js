@@ -6,6 +6,7 @@ import {
     TextInput,
     InlineNotification,
 } from 'carbon-components-react';
+import { useTranslation } from 'react-i18next';
 
 
 const ResetPasswordForm = ({ onUsernameChange,
@@ -14,26 +15,29 @@ const ResetPasswordForm = ({ onUsernameChange,
     onRepeatPasswordChange,
     resetPasswordProgress }) => {
 
+    const { t } = useTranslation();
+
+
     const UsernameTextInputProps = {
         id: 'username',
-        labelText: 'Username',
+        labelText: t("resetpasswordform.inputlabel.username"),
         placeholder: 'john_doe',
     };
 
     const VerificationCodeTextInputProps = {
         id: 'verification_code',
-        labelText: 'Verification Code',
+        labelText: t("resetpasswordform.inputlabel.verificationcode"),
         placeholder: 'XXXXXX',
     };
 
     const PasswordProps = {
         id: 'password',
-        labelText: 'New Password',
+        labelText: t("resetpasswordform.inputlabel.password"),
     };
 
     const RepeatPasswordProps = {
         id: 'repeat_password',
-        labelText: 'Repeat New Password',
+        labelText: t("resetpasswordform.inputlabel.repeatpassword"),
     };
 
 
@@ -46,12 +50,12 @@ const ResetPasswordForm = ({ onUsernameChange,
                 spaceEqually={true}
             >
                 <ProgressStep
-                    label='Step 1: Send reset code via email'
-                    description="Step 1: Send reset code via email"
+                    label={t("resetpasswordform.progressindicator.step1")}
+                    description={t("resetpasswordform.progressindicator.step1")}
                 />
                 <ProgressStep
-                    label="Step 2: Reset password"
-                    description="Step 2: Reset password"
+                    label={t("resetpasswordform.progressindicator.step2")}
+                    description={t("resetpasswordform.progressindicator.step2")}
                 />
 
             </ProgressIndicator>
@@ -69,8 +73,8 @@ const ResetPasswordForm = ({ onUsernameChange,
                     <>
                         <InlineNotification
                             kind="success"
-                            subtitle={<span>Please check the inbox of the associated email account.</span>}
-                            title="Verification Code Sent"
+                            subtitle={t("resetpasswordform.notification.subtitle")}
+                            title={t("resetpasswordform.notification.title")}
                             hideCloseButton={true}
                             lowContrast={true}
                         />

@@ -3,19 +3,23 @@ import {
   Form,
   TextInput
 } from 'carbon-components-react'
+import { useTranslation } from 'react-i18next';
 
 
 
-const SignInForm = ({onUsernameChange, onPasswordChange, startPasswordReset}) => {
+const SignInForm = ({onUsernameChange, onPasswordChange}) => {
   
+  const { t } = useTranslation();
+
+
   const UsernameTextInputProps = {
     id: 'username',
-    labelText: 'Username',
+    labelText: t("signinform.inputlabel.username"),
   };
   
   const PasswordProps = {
     id: 'password',
-    labelText: 'Password',
+    labelText: t("signinform.inputlabel.password"),
   };
   
   return (<Form style={{ marginTop: '2rem' }}>
@@ -32,8 +36,6 @@ const SignInForm = ({onUsernameChange, onPasswordChange, startPasswordReset}) =>
         onChange={(e) => onPasswordChange(e.target.value)} 
         {...PasswordProps}
       />
-      <br/>
-      Forgot your password? <span onClick={startPasswordReset} className="pointer" > Click here</span>
   </Form>
   )};
 export default SignInForm;

@@ -3,30 +3,33 @@ import {
   Form,
   TextInput,
 } from 'carbon-components-react'
+import { useTranslation } from 'react-i18next';
 
 
 const SignUpForm = ({ onUsernameChange, onEmailChange, onPasswordChange, onRepeatPasswordChange }) => {
 
+  const { t } = useTranslation();
+
   const UsernameTextInputProps = {
     id: 'username',
-    labelText: 'Username',
+    labelText: t("signupform.inputlabel.username"),
     placeholder: 'john_doe',
   };
 
   const EmailTextInputProps = {
     id: 'email',
-    labelText: 'Email Address',
+    labelText: t("signupform.inputlabel.email"),
     placeholder: 'john@doe.com',
   };
 
   const PasswordProps = {
     id: 'password',
-    labelText: 'Password',
+    labelText: t("signupform.inputlabel.password"),
   };
 
   const RepeatPasswordProps = {
     id: 'repeat_password',
-    labelText: 'Repeat Password',
+    labelText: t("signupform.inputlabel.repeatpassword"),
   };
 
 

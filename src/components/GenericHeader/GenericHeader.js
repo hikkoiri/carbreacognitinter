@@ -80,9 +80,9 @@ const GenericHeader = withRouter(({ history,
               onClick={onClickSideNavExpand}
               isActive={isSideNavExpanded}
             />*/}
-            <HeaderName element={Link} to="/" prefix="Home of">
-              CARBREACOGNITINTER
-        </HeaderName>
+            <HeaderName element={Link} to="/" prefix={t("genericheader.name.prefix")}>
+              {t("genericheader.name.suffix")}
+            </HeaderName>
 
             {/*<HeaderNavigation aria-label="" />*/}
 
@@ -101,14 +101,14 @@ const GenericHeader = withRouter(({ history,
           <Modal
             open={isAccountVerificationModalOpen}
             passiveModal
-            modalHeading="Congratulations. Your account get successfully created."
+            modalHeading={t("genericheader.accountverificationmodal.heading")}
             onRequestClose={() => setIsAccountVerificationModalOpen(false)}
           >
-            Please check your email inbox for the account verification link we sent you.
+            {t("genericheader.accountverificationmodal.text.1")}
             <br />
-             Without a verified email address we can't grant you access to this page.
+            {t("genericheader.accountverificationmodal.text.2")}
              <br />
-             Thank you for understanding.
+             {t("genericheader.accountverificationmodal.text.3")}
             </Modal>
           <AuthenticationModal
             isOpen={isAuthenticationModalOpen}

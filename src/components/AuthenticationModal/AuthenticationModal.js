@@ -8,6 +8,7 @@ import SignInForm from '../SignInForm';
 import SignUpForm from '../SignUpForm';
 import { Auth } from 'aws-amplify';
 import ResetPasswordForm from '../ResetPasswordForm';
+import { useTranslation } from 'react-i18next';
 
 
 const AuthenticationModal = ({ isOpen,
@@ -23,6 +24,8 @@ const AuthenticationModal = ({ isOpen,
     // 2 -> Sign Up
     // 3 -> Reset Password
     const [isRequestInProcessing, setIsRequestInProcessing] = useState(false)
+    const { t } = useTranslation();
+
 
     //sign in 
     const [signInUsername, setSignInUsername] = useState('')
@@ -77,17 +80,17 @@ const AuthenticationModal = ({ isOpen,
 
         try {
             if (signInUsername === "") {
-                errorNotification("Username cannot be empty.")
+                errorNotification(t("authenticationModal.signin.errornotification.usernamemissing"))
                 return;
             }
 
             if (signInPassword === "") {
-                errorNotification("Password cannot be empty.")
+                errorNotification(t("authenticationModal.signin.errornotification.passwordmissing"))
                 return;
             }
 
-            await signInWithCredentials(signInUsername,signInPassword)
-            
+            await signInWithCredentials(signInUsername, signInPassword)
+
         } catch (error) {
             errorNotification(error.message)
             console.log('error signing in', error);
@@ -96,13 +99,13 @@ const AuthenticationModal = ({ isOpen,
         }
     }
 
-    async function signInWithCredentials(username, password){
+    async function signInWithCredentials(username, password) {
         console.log("signing in")
 
         await Auth.signIn(username, password);
         //signin succeded
         signInComplete()
-        successNotification("Sign In succeeded")
+        successNotification(t("authenticationModal.signin.successnotification.siginsuceeded"))
     }
 
     async function signUp() {
@@ -115,35 +118,35 @@ const AuthenticationModal = ({ isOpen,
 
         try {
             if (signUpUsername === "") {
-                errorNotification("Username cannot be empty.")
+                errorNotification(t("authenticationModal.signup.errornotification.usernamemissing"))
                 return;
             }
 
             if (signUpEmail === "") {
-                errorNotification("Email cannot be empty.")
+                errorNotification(t("authenticationModal.signup.errornotification.emailmissing"))
                 return;
             }
 
             //check email validity
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
             if (!pattern.test(signUpEmail)) {
-                errorNotification("Please enter a valid email address.")
+                errorNotification(t("authenticationModal.signup.errornotification.emailinvalid"))
                 return;
             }
 
 
             if (signUpPassword === "") {
-                errorNotification("Password cannot be empty.")
+                errorNotification(t("authenticationModal.signup.errornotification.passwordmissing"))
                 return;
             }
 
             if (signUpRepeatPassword === "") {
-                errorNotification("Repeat Password cannot be empty.")
+                errorNotification(t("authenticationModal.signup.errornotification.repeatpasswordmissing"))
                 return;
             }
 
             if (signUpPassword !== signUpRepeatPassword) {
-                errorNotification("Entered passwords do not match.")
+                errorNotification(t("authenticationModal.signup.errornotification.passwordmismatch"))
                 return;
             }
 
@@ -157,7 +160,7 @@ const AuthenticationModal = ({ isOpen,
 
             //signup succeded
             signUpComplete()
-            successNotification("Sign Up succeeded. Verify you account next.")
+            successNotification(t("authenticationModal.signup.successnotification.siginsuceeded"))
         } catch (error) {
             errorNotification(error.message)
             console.log('error signing up:', error);
@@ -170,12 +173,11 @@ const AuthenticationModal = ({ isOpen,
         try {
             console.log("starting password reset")
             if (resetPasswordUsername === "") {
-                errorNotification("Username cannot be empty.")
+                errorNotification(t("authenticationModal.passwordreset.errornotification.usernamemissing"))
                 return;
             }
 
             await Auth.forgotPassword(resetPasswordUsername)
-
             setResetPasswordProgress(1)
 
         } catch (error) {
@@ -191,49 +193,49 @@ const AuthenticationModal = ({ isOpen,
             console.log("submitting password reset")
 
             if (resetPasswordVerificationCode === "") {
-                errorNotification("Verification code cannot be empty.")
+                errorNotification(t("authenticationModal.passwordresetsubmit.errornotification.codemissing"))
                 return;
             }
             if (resetPasswordNewPassword === "") {
-                errorNotification("New password cannot be empty.")
+                errorNotification(t("authenticationModal.passwordresetsubmit.errornotification.passwordmissing"))
                 return;
             }
 
             if (resetPasswordNewPasswordRepeat === "") {
-                errorNotification("Repeat password cannot be empty.")
+                errorNotification(t("authenticationModal.passwordresetsubmit.errornotification.repeatpasswordmissing"))
                 return;
             }
 
             if (resetPasswordNewPasswordRepeat !== resetPasswordNewPassword) {
-                errorNotification("Entered passwords do not match.")
+                errorNotification(t("authenticationModal.passwordresetsubmit.errornotification.passwordmismatch"))
                 return;
             }
 
             await Auth.forgotPasswordSubmit(resetPasswordUsername, resetPasswordVerificationCode, resetPasswordNewPassword)
-            successNotification("Password Reset succeeded")
-            signInWithCredentials(resetPasswordUsername,resetPasswordNewPassword)
-            
+            successNotification(t("authenticationModal.passwordresetsubmit.successnotification.suceeded"))
+            signInWithCredentials(resetPasswordUsername, resetPasswordNewPassword)
+
         } catch (error) {
             errorNotification(error.message)
             console.log('error resetting password: ', error);
         } finally {
             setIsRequestInProcessing(false)
-        }      
+        }
     }
 
 
     function getActionName() {
         switch (currentAuthenticationMode) {
             case 1:
-                return "Sign In"
+                return t("authenticationModal.signin.actionname")
             case 2:
-                return "Sign Up"
+                return t("authenticationModal.signup.actionname")
             case 3:
 
                 if (resetPasswordProgress === 0) {
-                    return "Request Verification Code for Password Reset"
+                    return t("authenticationModal.passwordreset.actionname")
                 } else {
-                    return "Reset Password"
+                    return t("authenticationModal.passwordresetsubmit.actionname")
                 }
 
             default:
@@ -249,28 +251,40 @@ const AuthenticationModal = ({ isOpen,
                 open={isOpen}
                 onRequestClose={close}
                 modalHeading={getActionName()}
-                modalLabel="User action"
+                modalLabel={t("authenticationModal.label")}
                 primaryButtonText={getActionName()}
                 primaryButtonDisabled={isRequestInProcessing}
-                secondaryButtonText="Cancel"
+                secondaryButtonText={t("authenticationModal.cancelbutton")}
                 onRequestSubmit={startAuthentication}>
 
 
                 {currentAuthenticationMode === 1 &&
                     <>
-                        <p> Don't have an account? <span onClick={() => setCurrentAuthenticationMode(2)}
-                            className="pointer" >Create one</span></p>
+                        <p>{t("authenticationModal.signin.signupreferrer.question")}
+                            <span onClick={() => setCurrentAuthenticationMode(2)}
+                                className="pointer" >{t("authenticationModal.signin.signupreferrer.link")}
+                            </span>
+                        </p>
                         <SignInForm
                             onUsernameChange={(username) => setSignInUsername(username)}
                             onPasswordChange={(password) => setSignInPassword(password)}
-                            startPasswordReset={() => setCurrentAuthenticationMode(3)}
                         />
+                        <br />
+
+                        <p>{t("authenticationModal.signin.passwordresetreferrer.question")} <span onClick={() => setCurrentAuthenticationMode(3)} className="pointer" >
+                            {t("authenticationModal.signin.passwordresetreferrer.link")}
+                        </span>
+                        </p>
                     </>
                 }
 
                 {currentAuthenticationMode === 2 &&
                     <>
-                        <p> Already have an account? <span onClick={() => setCurrentAuthenticationMode(1)} className="pointer" >Try signing in</span></p>
+                        <p>{t("authenticationModal.signup.signinreferrer.question")}
+                            <span onClick={() => setCurrentAuthenticationMode(1)} className="pointer" >
+                                {t("authenticationModal.signup.signinreferrer.link")}
+                            </span>
+                        </p>
                         <SignUpForm
                             onUsernameChange={(username) => setSignUpUsername(username)}
                             onEmailChange={(email) => setSignUpEmail(email)}

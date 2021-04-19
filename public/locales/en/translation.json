@@ -1,7 +1,114 @@
 {
-  "title": "Welcome to react using react-i18next",
-  "description": {
-    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-    "part2": "Switch language between english and german using buttons above."
+  "landingpage": {
+    "title": "Landing Page"
+  },
+  "myprofilepage": {
+    "title": "My Profile",
+    "username": "Username:",
+    "email_address": "Email Address:",
+    "email_verified": "Email verified:"
+  },
+  "logout": "Logout",
+  "genericheader": {
+    "name": {
+      "prefix": "Home of",
+      "suffix": "CARBREACOGNITINTER"
+    },
+    "accountverificationmodal": {
+      "heading": "Congratulations. Your account get successfully created.",
+      "text": {
+        "1": "Please check your email inbox for the account verification link we sent you.",
+        "2": "Without a verified email address we can't grant you access to this page.",
+        "3": "Thank you for understanding."
+      }
+    }
+  },
+  "authenticationModal": {
+    "label":"User action",
+    "cancelbutton":"Cancel",
+    "signin": {
+      "actionname":"Sign In",
+      "errornotification": {
+        "usernamemissing": "Username cannot be empty.",
+        "passwordmissing": "Password cannot be empty."
+      },
+      "successnotification": {
+        "siginsuceeded": "Sign In succeeded."
+      },
+      "signupreferrer":{
+        "question":"Don't have an account? ",
+        "link":"Create one"
+      },
+      "passwordresetreferrer":{
+        "question":"Forgot your password? ",
+        "link":" Click here"
+      }
+    },
+    "signup": {
+      "actionname":"Sign Up",
+      "errornotification": {
+        "usernamemissing": "Username cannot be empty.",
+        "emailmissing": "Email cannot be empty.",
+        "emailinvalid": "Please enter a valid email address.",
+        "passwordmissing": "Password cannot be empty.",
+        "repeatpasswordmissing": "Repeat Password cannot be empty.",
+        "passwordmismatch": "Entered passwords do not match."
+      },
+      "successnotification": {
+        "siginsuceeded": "Sign Up succeeded. Verify you account next."
+      },
+      "signinreferrer":{
+        "question":"Already have an account? ",
+        "link":"Try signing in"
+      }
+    },
+    "passwordreset": {
+      "actionname":"Request Verification Code for Password Reset",
+      "errornotification": {
+        "usernamemissing": "Username cannot be empty."
+      }
+    },
+    "passwordresetsubmit": {
+      "actionname":"Reset Password",
+      "errornotification": {
+        "codemissing": "Verification code cannot be empty.",
+        "passwordmissing": "New password cannot be empty.",
+        "repeatpasswordmissing": "Repeat password cannot be empty.",
+        "passwordmismatch": "Entered passwords do not match."
+      },
+      "successnotification": {
+        "suceeded": "Password Reset succeeded."
+      }
+    }
+  },
+  "signinform":{
+    "inputlabel":{
+      "username":"Username",
+      "password": "Password"
+    }
+  },
+  "signupform":{
+    "inputlabel":{
+      "username":"Username",
+      "email": "Email Address",
+      "password": "Password",
+      "repeatpassword": "Repeat Password"
+    }
+  },
+  "resetpasswordform":{
+    "inputlabel":{
+      "username":"Username",
+      "verificationcode": "Verification Code",
+      "password": "New Password",
+      "repeatpassword": "Repeat New Password"
+    },
+    "progressindicator":{
+      "step1": "Step 1: Send reset code via email",
+      "step2": "Step 2: Reset password"
+    },
+    "notification":{
+      "subtitle": "Please check the inbox of the associated email account.",
+      "title": "Verification Code Sent"
+    }
   }
 }
